@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
-    "core-js": "^3.6.4"
+    "core-js": "^3.6.4",
+    "three": "^0.123.0"
   },
   "browserslist": [
     ">0.2%",
