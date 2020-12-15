@@ -17,7 +17,7 @@ const controls = new OrbitControls( camera, renderer.domElement );
 camera.position.z = 5;
 controls.update();
 const repo = new ElementsRepository();
-const element = repo.getByName(repo.showNames()[10])
+const element = repo.getByName(repo.showNames()[3])
 console.log(element.shells);
 console.log(element.name)
 
@@ -29,5 +29,6 @@ function animate() {
 	controls.update();
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
+	atom.update();
 }
 animate();
