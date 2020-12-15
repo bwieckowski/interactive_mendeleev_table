@@ -1,5 +1,3 @@
-
-import { random } from 'core-js/fn/number';
 import * as THREE from 'three';
 import {getRandomFloat, drawSphere, rotateAboutPoint} from './helpers';
 class Atom extends THREE.Group {
