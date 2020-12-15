@@ -19,13 +19,22 @@ class ElementsRepository {
         return this;
     }
 
-        getByName(name) {
-            return this.elements.find(element => element.name === name)
+    getByName( name ) {
+        return this.elements.find(element => element.name === name)
+    }
+
+    getByIndex( index ) {
+        return this.elements[index];
+    }
+
+    getByPosytion( xpos, ypos ) {
+        return this.elements.find(element => element.xpos === xpos && element.ypos === ypos);
     }
 
     showNames() {
         return this.elements.map(({name}) => name)
     }
+
 }
 
 export default ElementsRepository;
