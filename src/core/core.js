@@ -1,7 +1,7 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import {setupRaycaster} from '../helpers/raycaster';
+import { Raycaster } from '../helpers/raycaster';
 
 export const initEnviroment = () => {
   const scene = new THREE.Scene();
@@ -42,7 +42,7 @@ export const initEnviroment = () => {
     requestAnimationFrame( animate );
   }
   
-  setupRaycaster(camera, scene);
+  Raycaster.setupRaycaster(camera, scene);
 
   return {
     animate,

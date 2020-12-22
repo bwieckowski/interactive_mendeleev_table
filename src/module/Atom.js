@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {getRandomFloat, drawSphere} from './helpers';
 import { getShell } from './Shell';
-import {raycaster, connectRaycaster} from '../helpers/raycaster';
+import {raycaster} from '../helpers/raycaster';
 class Atom extends THREE.Group {
     constructor(element){
       super()
@@ -23,7 +23,6 @@ class Atom extends THREE.Group {
         const { shell, electrons } = getShell(electronsAmount, radius)
         this.electrons.push(...electrons);
         const intersect = raycaster.intersectObject(shell);
-        connectRaycaster(intersect);
         this.add(shell);
       });
     }
