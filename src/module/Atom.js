@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import {getRandomFloat, drawSphere, rotateAboutPoint} from './helpers';
+import {getRandomFloat, drawSphere} from './helpers';
+import { getShell } from './Shell';
+import {raycaster, connectRaycaster} from '../helpers/raycaster';
 class Atom extends THREE.Group {
     constructor(element){
       super()
@@ -17,26 +19,12 @@ class Atom extends THREE.Group {
     drawShells = () => {
       const { element: {shells}} = this;
       shells.forEach((electronsAmount, i) => {
-          const radius = 4*(1/shells.length)*(i+1);
-          const tube = 0.005;
-
-          const geometry = new THREE.TorusGeometry( radius, tube, 3, 100 );
-          const material = new THREE.MeshBasicMaterial( { color: 0xdddddd } );
-          const torus = new THREE.Mesh( geometry, material );
-          const shell = new THREE.Group();
-          shell.add(torus)
-
-          for( let i = 0; i < electronsAmount; i++ ) {
-            const sphere = drawSphere(0x00ff00);
-            sphere.position.setX(radius)
-
-            const pivotPoint = new THREE.Object3D();
-            pivotPoint.rotation.z = getRandomFloat(0, 360);
-            this.electrons.push({ sphere: pivotPoint, speed: getRandomFloat(0.005, 0.009)});
-            pivotPoint.add(sphere);
-            shell.add(pivotPoint);
-          }
-          this.add(shell)
+        const radius = 4*(1/shells.length)*(i+1);
+        const { shell, electrons } = getShell(electronsAmount, radius)
+        this.electrons.push(...electrons);
+        const intersect = raycaster.intersectObject(shell);
+        connectRaycaster(intersect);
+        this.add(shell);
       });
     }
 
