@@ -6,8 +6,7 @@ class Atom extends THREE.Group {
       this.element = element;
       this.electrons = [];
       
-      const atom = this.drawAtom();
-      this.add(atom);
+      this.drawAtom();
     }
   
     drawAtom = () => {
@@ -24,18 +23,20 @@ class Atom extends THREE.Group {
           const geometry = new THREE.TorusGeometry( radius, tube, 3, 100 );
           const material = new THREE.MeshBasicMaterial( { color: 0xdddddd } );
           const torus = new THREE.Mesh( geometry, material );
+          const shell = new THREE.Group();
+          shell.add(torus)
 
           for( let i = 0; i < electronsAmount; i++ ) {
             const sphere = drawSphere(0x00ff00);
             sphere.position.setX(radius)
 
             const pivotPoint = new THREE.Object3D();
-            pivotPoint.add(sphere);
             pivotPoint.rotation.z = getRandomFloat(0, 360);
-            this.add(pivotPoint);
             this.electrons.push({ sphere: pivotPoint, speed: getRandomFloat(0.005, 0.009)});
+            pivotPoint.add(sphere);
+            shell.add(pivotPoint);
           }
-          this.add(torus)
+          this.add(shell)
       });
     }
 
@@ -62,7 +63,7 @@ class Atom extends THREE.Group {
     }
   }
 
-  update() {
+  update = () => {
     this.electrons.forEach(({sphere, speed}) => {
       sphere.rotation.z += speed;
     })
