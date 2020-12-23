@@ -30,22 +30,30 @@ export const getShell = (electronsAmount, radius) => {
       shell.add(pivotPoint);
     }
 
+    let isHovered = false;
+
     const hoverShell = () => {
-      torus.material.color.set(0xffff00);
-      shell.children.forEach(child => {
-        if( child.type !== 'Mesh' ) {
-          child.children[0].material.color.set(0xffff00);
-        }
-      })
+      if( !isHovered ) {
+        torus.material.color.set(0xffff00);
+        shell.children.forEach(child => {
+          if( child.type !== 'Mesh' ) {
+            child.children[0].material.color.set(0xffff00);
+          }
+        })
+        isHovered = true;
+      }
     }
 
     const unhoverShell = () => {
-      torus.material.color.set(0xdddddd);
-      shell.children.forEach(child => {
-        if( child.type !== 'Mesh' ) {
-          child.children[0].material.color.set(0x00ff00);
-        }
-      })
+      if(isHovered) {
+        torus.material.color.set(0xdddddd);
+        shell.children.forEach(child => {
+          if( child.type !== 'Mesh' ) {
+            child.children[0].material.color.set(0x00ff00);
+          }
+        })
+        isHovered = false;
+      }
     }
 
     return {
