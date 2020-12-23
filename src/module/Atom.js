@@ -1,13 +1,14 @@
 import * as THREE from 'three';
-import {getRandomFloat, drawSphere, rotateAboutPoint} from './helpers';
+import {getRandomFloat, drawSphere} from './helpers';
+import { getShell } from './Shell';
+import {Raycaster} from '../helpers/raycaster';
 class Atom extends THREE.Group {
     constructor(element){
       super()
       this.element = element;
       this.electrons = [];
       
-      const atom = this.drawAtom();
-      this.add(atom);
+      this.drawAtom();
     }
   
     drawAtom = () => {
@@ -18,24 +19,23 @@ class Atom extends THREE.Group {
     drawShells = () => {
       const { element: {shells}} = this;
       shells.forEach((electronsAmount, i) => {
-          const radius = 4*(1/shells.length)*(i+1);
-          const tube = 0.005;
+        const radius = 4*(1/shells.length)*(i+1);
+        const { shell, electrons, hoverShell, unhoverShell } = getShell(electronsAmount, radius)
+        this.electrons.push(...electrons);
 
-          const geometry = new THREE.TorusGeometry( radius, tube, 3, 100 );
-          const material = new THREE.MeshBasicMaterial( { color: 0xdddddd } );
-          const torus = new THREE.Mesh( geometry, material );
+        const raycastAction = ( raycaster, mouse ) => {
+          raycaster.near = 1
+          const intersects = raycaster.intersectObjects(shell.children, true);
 
-          for( let i = 0; i < electronsAmount; i++ ) {
-            const sphere = drawSphere(0x00ff00);
-            sphere.position.setX(radius)
+           if( intersects.length > 0) {
+             hoverShell()
+           } else {
+              unhoverShell()
+           }
+        }
 
-            const pivotPoint = new THREE.Object3D();
-            pivotPoint.add(sphere);
-            pivotPoint.rotation.z = getRandomFloat(0, 360);
-            this.add(pivotPoint);
-            this.electrons.push({ sphere: pivotPoint, speed: getRandomFloat(0.005, 0.009)});
-          }
-          this.add(torus)
+        Raycaster.addRaycasterAction(raycastAction)
+        this.add(shell)
       });
     }
 
@@ -62,7 +62,7 @@ class Atom extends THREE.Group {
     }
   }
 
-  update() {
+  update = () => {
     this.electrons.forEach(({sphere, speed}) => {
       sphere.rotation.z += speed;
     })
