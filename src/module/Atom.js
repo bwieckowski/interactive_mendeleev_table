@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {getRandomFloat, drawSphere} from './helpers';
 import { getShell } from './Shell';
-import {raycaster, connectRaycaster} from '../helpers/raycaster';
+import {Raycaster} from '../helpers/raycaster';
 class Atom extends THREE.Group {
     constructor(element){
       super()
@@ -20,11 +20,22 @@ class Atom extends THREE.Group {
       const { element: {shells}} = this;
       shells.forEach((electronsAmount, i) => {
         const radius = 4*(1/shells.length)*(i+1);
-        const { shell, electrons } = getShell(electronsAmount, radius)
+        const { shell, electrons, hoverShell, unhoverShell } = getShell(electronsAmount, radius)
         this.electrons.push(...electrons);
-        const intersect = raycaster.intersectObject(shell);
-        connectRaycaster(intersect);
-        this.add(shell);
+
+        const raycastAction = ( raycaster, mouse ) => {
+          raycaster.near = 1
+          const intersects = raycaster.intersectObjects(shell.children, true);
+
+           if( intersects.length > 0) {
+             hoverShell()
+           } else {
+              unhoverShell()
+           }
+        }
+
+        Raycaster.addRaycasterAction(raycastAction)
+        this.add(shell)
       });
     }
 

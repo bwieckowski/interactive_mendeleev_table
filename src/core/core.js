@@ -1,7 +1,7 @@
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import {setupRaycaster} from '../helpers/raycaster';
+import { Raycaster } from '../helpers/raycaster';
 
 export const initEnviroment = () => {
   const scene = new THREE.Scene();
@@ -24,12 +24,13 @@ export const initEnviroment = () => {
   renderer.domElement.style.margin = "0";
   document.body.appendChild( renderer.domElement );
   const controls = new OrbitControls( camera, renderer.domElement );
+  controls.enablePan = false;
 
   camera.position.z = 5;
 
   const updates = [];
 
-  const addUpdate =( update ) => {
+  const addUpdate = ( update ) => {
     updates.push(update);
   }
   
@@ -42,7 +43,7 @@ export const initEnviroment = () => {
     requestAnimationFrame( animate );
   }
   
-  setupRaycaster(camera, scene);
+  Raycaster.setupRaycaster(camera, renderer);
 
   return {
     animate,
