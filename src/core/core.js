@@ -26,6 +26,12 @@ export const initEnviroment = () => {
   const controls = new OrbitControls( camera, renderer.domElement );
   controls.enablePan = false;
 
+  controls.maxPolarAngle = 2 * Math.PI / 3;
+  controls.minPolarAngle = 2 * Math.PI / 6;
+
+  controls.maxAzimuthAngle =  2 * Math.PI / 6;
+  controls.minAzimuthAngle = -2 * Math.PI / 6;
+
   camera.position.z = 5;
 
   const updates = [];

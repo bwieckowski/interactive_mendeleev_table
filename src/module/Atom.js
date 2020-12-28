@@ -17,9 +17,9 @@ class Atom extends THREE.Group {
     }
 
     drawShells = () => {
-      const { element: {shells}} = this;
+      const { element: { shells }} = this;
       shells.forEach((electronsAmount, i) => {
-        const radius = 4*(1/shells.length)*(i+1);
+        const radius = 4 * (1/shells.length) * (i+1);
         const { shell, electrons, hoverShell, unhoverShell } = getShell(electronsAmount, radius)
         this.electrons.push(...electrons);
 
@@ -27,8 +27,8 @@ class Atom extends THREE.Group {
           raycaster.near = 1
           const intersects = raycaster.intersectObjects(shell.children, true);
 
-           if( intersects.length > 0) {
-             hoverShell()
+           if( intersects?.length ) {
+              hoverShell()
            } else {
               unhoverShell()
            }
