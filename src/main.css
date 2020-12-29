@@ -12,6 +12,7 @@ html {
 body, html {
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 
@@ -26,3 +27,13 @@ body {
   height: 100vh;
 }
 
+.adnotation {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  width: 300px;
+  background-color: #fdf800;
+  border: 2px solid black;
+  font-family: Arial;
+  padding: 5px;
+}

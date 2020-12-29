@@ -14,10 +14,9 @@ const {
 const repo = new ElementsRepository();
 const element = repo.getByName(repo.showNames()[3])
 
-
 const atom = new Atom(repo.getByIndex(115));
-scene.add(atom)
 
+scene.add(atom)
 addUpdate(atom.update);
 
 animate();

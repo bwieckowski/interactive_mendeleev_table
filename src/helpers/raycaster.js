@@ -12,12 +12,15 @@ export const Raycaster = {
   setupRaycaster: (camera, renderer) => {
     
     const onMouseMove = (event) => {
-      
+    const {domElement: {offsetLeft, offsetTop, width, height}} = renderer;
       // calculate mouse position in normalized device coordinates
       // (-1 to +1) for both components
-      mouse.x = ( (event.clientX -renderer.domElement.offsetLeft) / renderer.domElement.width ) * 2 - 1;
-      mouse.y = -( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height ) * 2 + 1;
-      
+      mouse.x = ( (event.clientX - offsetLeft) / width ) * 2 - 1;
+      mouse.y = -( (event.clientY - offsetTop) / height ) * 2 + 1;
+
+      mouse.clientX = event.clientX;
+      mouse.clientY = event.clientY;
+
         if(Raycaster.raycastActions?.length) {
           Raycaster.raycastActions.forEach((raycastAction) => {
           raycaster.setFromCamera(mouse, camera);
