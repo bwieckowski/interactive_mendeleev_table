@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-//import './main.css';
+import './main.js';
 import ElementsRepository from './model/ElementsRepository';
 import Atom from './module/Atom';
 
