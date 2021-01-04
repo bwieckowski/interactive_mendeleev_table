@@ -35,6 +35,9 @@ class ElementsRepository {
         return this.elements.map(({name}) => name)
     }
 
+    getElements(){
+        return this.elements
+    }
 }
 
 export default ElementsRepository;

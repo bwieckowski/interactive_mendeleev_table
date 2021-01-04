@@ -29,21 +29,19 @@
       .element {
         width: 120px;
         height: 160px;
-        box-shadow: 0px 0px 12px rgba(255, 255, 255, 255);
-        border: 1px solid rgba(255, 255, 255, 255);
         text-align: center;
-        cursor: default;
       }
       .element:hover {
-        box-shadow: 0px 0px 12px rgba(90, 46, 195, 165);
-        border: 1px solid rgba(127, 255, 255, 0.75);
+        box-shadow: 5px 5px 12px rgba(90, 46, 195, 165);
+        border: 1px solid rgba(0, 0, 255, 255);
       }
       .element .number {
         position: absolute;
         top: 20px;
         right: 20px;
-        font-size: 15px;
+        font-size: 18px;
         color: rgba(255, 255, 255, 255);
+        text-shadow: 0px 0px 8px rgba(90, 46, 195, 165);
       }
       .element .symbol {
         position: absolute;
@@ -53,15 +51,16 @@
         font-size: 60px;
         font-weight: bold;
         color: rgba(255, 255, 255, 255);
-        text-shadow: 0 0 10px rgba(0, 255, 200, 0.95);
+        text-shadow: 5px 5px 12px rgba(90, 46, 195, 165);
       }
       .element .details {
         position: absolute;
         bottom: 15px;
         left: 0px;
         right: 0px;
-        font-size: 12px;
+        font-size: 16px;
         color: rgba(255, 255, 255, 255);
+        text-shadow: 0px 05px 8px rgba(90, 46, 195, 165);
       }
       button {
         color: rgba(255, 255, 255, 255);
@@ -71,19 +70,12 @@
         padding: 5px 10px;
         cursor: pointer;
       }
-      button:hover {
-        background-color: rgba(0, 0, 0, 0);
-      }
-      button:active {
-        color: #000000;
-        background-color: rgba(0, 0, 0, 0);
-      }
     </style>
   </head>
   <body>
     <div id="container"></div>
     <div id="menu">
-      <button id="table">TABLE</button>
+
     </div>
   </body>
 </html>
