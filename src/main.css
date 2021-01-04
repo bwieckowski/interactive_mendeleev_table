@@ -13,12 +13,12 @@ body, html {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  background-color: #000000;
 }
 
 
 body {
   font-size: 1.6rem;
-  background-color: #ecf0f1;
   margin: 0;
   padding: 0;
   display: flex;
@@ -27,13 +27,70 @@ body {
   height: 100vh;
 }
 
+#canvas{
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index:  -1;
+  top: 0;
+} 
+
+.btn { 
+  position: absolute;
+  left: 100%;
+  margin-left: -200px;
+  z-index: -1;
+  bottom: 100%;
+  margin-bottom: -85px;
+  font-size: 20px;
+}
+
 .adnotation {
   position: absolute;
   left: 0;
+  bottom: 254px;
   opacity: 0;
   width: 300px;
   background-color: #fdf800;
   border: 2px solid black;
   font-family: Arial;
   padding: 5px;
+  z-index: -1;
+}
+
+.element {
+  width: 120px;
+  height: 160px;
+  text-align: center;
+}
+.element:hover {
+  box-shadow: 5px 5px 12px rgba(90, 46, 195, 165);
+  border: 1px solid rgba(0, 0, 255, 255);
+}
+.element .number {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 255);
+  text-shadow: 0px 0px 8px rgba(90, 46, 195, 165);
+}
+.element .symbol {
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  right: 0px;
+  font-size: 60px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 255);
+  text-shadow: 5px 5px 12px rgba(90, 46, 195, 165);
+}
+.element .details {
+  position: absolute;
+  bottom: 15px;
+  left: 0px;
+  right: 0px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 255);
+  text-shadow: 0px 05px 8px rgba(90, 46, 195, 165);
 }
