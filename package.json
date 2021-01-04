@@ -44,7 +44,8 @@
     "core-js": "^3.6.4",
     "three": "^0.123.0",
     "three-css3drenderer": "^1.0.1",
-    "three-trackballcontrols": "^0.9.0"
+    "three-trackballcontrols": "^0.9.0",
+    "tween": "^0.9.0"
   },
   "browserslist": [
     ">0.2%",
