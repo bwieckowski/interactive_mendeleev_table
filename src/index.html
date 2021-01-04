@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Three.js Periodic Table Example</title>
+    <title>Three.js Periodic Table</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -29,21 +29,21 @@
       .element {
         width: 120px;
         height: 160px;
-        box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-        border: 1px solid rgba(127, 255, 255, 0.25);
+        box-shadow: 0px 0px 12px rgba(255, 255, 255, 255);
+        border: 1px solid rgba(255, 255, 255, 255);
         text-align: center;
         cursor: default;
       }
       .element:hover {
-        box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+        box-shadow: 0px 0px 12px rgba(90, 46, 195, 165);
         border: 1px solid rgba(127, 255, 255, 0.75);
       }
       .element .number {
         position: absolute;
         top: 20px;
         right: 20px;
-        font-size: 12px;
-        color: rgba(127, 255, 255, 0.75);
+        font-size: 15px;
+        color: rgba(255, 255, 255, 255);
       }
       .element .symbol {
         position: absolute;
@@ -52,8 +52,8 @@
         right: 0px;
         font-size: 60px;
         font-weight: bold;
-        color: rgba(255, 255, 255, 0.75);
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+        color: rgba(255, 255, 255, 255);
+        text-shadow: 0 0 10px rgba(0, 255, 200, 0.95);
       }
       .element .details {
         position: absolute;
@@ -61,22 +61,22 @@
         left: 0px;
         right: 0px;
         font-size: 12px;
-        color: rgba(127, 255, 255, 0.75);
+        color: rgba(255, 255, 255, 255);
       }
       button {
-        color: rgba(127, 255, 255, 0.75);
+        color: rgba(255, 255, 255, 255);
         background: transparent;
-        outline: 1px solid rgba(127, 255, 255, 0.75);
+        outline: 1px solid rgba(255, 255, 255, 255);
         border: 0px;
         padding: 5px 10px;
         cursor: pointer;
       }
       button:hover {
-        background-color: rgba(0, 255, 255, 0.5);
+        background-color: rgba(0, 0, 0, 0);
       }
       button:active {
         color: #000000;
-        background-color: rgba(0, 255, 255, 0.75);
+        background-color: rgba(0, 0, 0, 0);
       }
     </style>
   </head>
@@ -84,9 +84,6 @@
     <div id="container"></div>
     <div id="menu">
       <button id="table">TABLE</button>
-      <button id="sphere">SPHERE</button>
-      <button id="helix">HELIX</button>
-      <button id="grid">GRID</button>
     </div>
   </body>
 </html>

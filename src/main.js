@@ -126,8 +126,7 @@ var table = [
 ];
 
 let camera, scene, renderer, controls, composer;
-var hblur, vblur;
-let targets = {simple: [], table: [], sphere: [], helix: [], grid: []};
+let targets = {simple: [], table: []};
 
 init();
 animate();
@@ -135,19 +134,12 @@ animate();
 function init() {
 
     initCamera();
-
     initScene();
-
     initObjects();
-
     addClickListeners();
-
     initRenderer();
-
     initTrackbarControls();
-
     transform(targets.table, 2000);
-
     window.addEventListener('resize', onWindowResize, false);
 
 }
@@ -156,7 +148,7 @@ function initCamera() {
 
     camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 3000;
-
+    
 }
 
 function initScene() {
@@ -175,16 +167,11 @@ function initRenderer() {
 function initObjects() {
 
     simpleObjectsLayout();
-    generateGeometricLayouts();
-
 }
 
 function addClickListeners() {
 
     addClickListener(targets.table, 'table');
-    addClickListener(targets.sphere, 'sphere');
-    addClickListener(targets.helix, 'helix');
-    addClickListener(targets.grid, 'grid');
 
 }
 
@@ -275,61 +262,6 @@ function initTrackbarControls() {
     controls.minDistance = 500;
     controls.maxDistance = 6000;
     controls.addEventListener('change', render);
-}
-
-function generateGeometricLayouts() {
-
-    let sphereVector = new THREE.Vector3();
-    let helixVector = new THREE.Vector3();
-
-    for (let i = 0, l = targets.simple.length; i < l; i++) {
-        addSphereObject(sphereVector, i, l);
-        addHelixObject(helixVector, i);
-        addGridObject(i);
-    }
-
-}
-
-function addSphereObject(sphereVector, index, length) {
-
-    const phi = Math.acos(-1 + (2 * index) / length);
-    const theta = Math.sqrt(length * Math.PI) * phi;
-    let object = new THREE.Object3D();
-
-    object.position.setFromSphericalCoords(800, phi, theta);
-
-    sphereVector.copy(object.position).multiplyScalar(2);
-
-    object.lookAt(sphereVector);
-
-    targets.sphere.push(object);
-}
-
-function addHelixObject(helixVector, index) {
-
-    const theta = index * 0.175 + Math.PI;
-    const y = -(index * 8) + 450;
-    let object = new THREE.Object3D();
-
-    object.position.setFromCylindricalCoords(900, theta, y);
-
-    helixVector.x = object.position.x * 2;
-    helixVector.y = object.position.y;
-    helixVector.z = object.position.z * 2;
-
-    object.lookAt(helixVector);
-
-    targets.helix.push(object);
-}
-
-function addGridObject(index) {
-
-    let object = new THREE.Object3D();
-    object.position.x = ((index % 5) * 400) - 800;
-    object.position.y = (-(Math.floor(index / 5) % 5) * 400) + 800;
-    object.position.z = (Math.floor(index / 25)) * 1000 - 2000;
-    targets.grid.push(object);
-
 }
 
 function transform(target, duration) {
