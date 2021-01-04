@@ -20,7 +20,7 @@ export const initEnviroment = () => {
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.domElement.style.padding = '0';
   renderer.domElement.style.margin = '0';
-  document.body.appendChild( renderer.domElement );
+  document.getElementById('canvas').appendChild( renderer.domElement );
   renderer.setClearColor( 0x111111, 1 );
 
   const controls = new OrbitControls( camera, renderer.domElement );
@@ -42,16 +42,20 @@ export const initEnviroment = () => {
 
   controls.maxPolarAngle = 2 * Math.PI / 3;
   controls.minPolarAngle = 2 * Math.PI / 6;
-
+  
   controls.maxAzimuthAngle =  2 * Math.PI / 6;
   controls.minAzimuthAngle = -2 * Math.PI / 6;
 
-  camera.position.z = 5;
+  camera.position.z = 10;
 
-  const updates = [];
+  let updates = [];
 
   const addUpdate = ( update ) => {
     updates.push(update);
+  }
+
+  const clearUpdates = () =>{
+    updates = []
   }
   
   const animate = () => {
@@ -68,7 +72,8 @@ export const initEnviroment = () => {
   return {
     animate,
     scene,
-    addUpdate
+    addUpdate,
+    clearUpdates
   }
 
 }

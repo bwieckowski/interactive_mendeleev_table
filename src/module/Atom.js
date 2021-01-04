@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import {getRandomFloat, drawSphere} from './helpers';
+import { drawSphere } from './helpers';
 import { getShell } from './Shell';
 import {Raycaster} from '../helpers/raycaster';
-import { drawLabel } from '../module/helpers';
 
 class Atom extends THREE.Group {
     constructor(element){
@@ -38,7 +37,7 @@ class Atom extends THREE.Group {
                 INTERSECTED.push(i)
               }
           
-              atnotation.style.transform = `translate(${mouse.clientX}px, ${mouse.clientY-600}px)`;
+              atnotation.style.transform = `translate(${mouse.clientX}px, ${mouse.clientY-700}px)`;
               atnotation.style.opacity = '1';
            } else {
               unhoverShell();

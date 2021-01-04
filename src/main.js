@@ -35,7 +35,7 @@ function initScene() {
 function initRenderer() {
     renderer = new CSS3DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('container').appendChild(renderer.domElement);
+    document.getElementById('periodic_container').appendChild(renderer.domElement);
 }
 
 function initObjects() {
@@ -77,20 +77,20 @@ function htmlElement(table, i) {
     details.innerHTML = table[i + 1] + '<br>' + table[i + 2];
     element.appendChild(details);
 
-    element.addEventListener('click', ()=>elementClickHandler(i), false);
+    element.addEventListener('click', ()=>elementClickHandler(i, table[i]), false);
 
     return element;
 }
 
-function elementClickHandler(i){
+function elementClickHandler(i, symbol){
 
     transform(targets.table,1000);
 
     new TWEEN.Tween(targets.simple[i / 5].position)
         .to({
             x: 0,
-            y: 0,
-            z: 100
+            y: 350,
+            z: 1200,
         })
         .easing(TWEEN.Easing.Exponential.InOut)
         .start();
@@ -99,6 +99,17 @@ function elementClickHandler(i){
         .to({}, 2000 * 2)
         .onUpdate(render)
         .start();
+  
+    const event = new Event('changeAtom');
+    event.symbol = symbol;
+    document.dispatchEvent(event);
+
+    document.getElementById('canvas').style.opacity = '0.7';    
+    document.getElementById('canvas').style.zIndex = '998'; 
+    document.querySelector('#adnotation').style.zIndex = '999'; 
+    document.querySelector('#adnotation_kernel').style.zIndex = '999'; 
+    document.querySelector('.btn').style.zIndex = '999'; 
+    
 }
 function tableLayout(table, index) {
 

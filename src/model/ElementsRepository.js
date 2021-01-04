@@ -7,7 +7,7 @@ class ElementsRepository {
 
     constructor() {
         if( !!ElementsRepository.instance ) {
-            return SingletonClass.instance;
+            return ElementsRepository.instance;
         }
         
         ElementsRepository.instance = this;
@@ -19,8 +19,8 @@ class ElementsRepository {
         return this;
     }
 
-    getByName( name ) {
-        return this.elements.find(element => element.name === name)
+    getBySymbol( symbol ) {
+        return this.elements.find(element => element.symbol === symbol)
     }
 
     getByIndex( index ) {
