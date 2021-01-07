@@ -6,7 +6,7 @@ const Element = (elementItem) => ({
             neutrons: parseInt(elementItem.atomic_mass - elementItem.number),
             number: elementItem.number,
             atomicMass: elementItem.atomic_mass,
-            appearanc: elementItem.appearanc,
+            appearance: elementItem.appearance,
             boil: elementItem.boil ,
             category: elementItem.category,
             color: elementItem.color,

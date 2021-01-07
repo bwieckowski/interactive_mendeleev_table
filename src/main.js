@@ -5,7 +5,8 @@ import { CSS3DObject } from 'three-css3drenderer';
 import { parserPeriodictTable } from './array/helper';
 import ElementsRepository from './model/ElementsRepository';
 
-var table = parserPeriodictTable (new ElementsRepository().getElements());
+const repository = new ElementsRepository();
+var table = parserPeriodictTable (repository.getElements());
 
 let camera, scene, renderer;
 let targets = {simple: [], table: []};
@@ -79,6 +80,7 @@ function htmlElement(table, i) {
 
     element.addEventListener('click', ()=>elementClickHandler(i, table[i]), false);
 
+
     return element;
 }
 
@@ -96,7 +98,7 @@ function elementClickHandler(i, symbol){
         .start();
 
     new TWEEN.Tween(this)
-        .to({}, 2000 * 2)
+        .to({}, 500 * 2)
         .onUpdate(render)
         .start();
   
@@ -110,6 +112,26 @@ function elementClickHandler(i, symbol){
     document.querySelector('#adnotation_kernel').style.zIndex = '999'; 
     document.querySelector('.btn').style.zIndex = '999'; 
     
+    document.getElementById('info_name').innerHTML = repository.getBySymbol(symbol).name;
+    document.getElementById('info_symbol').innerHTML = repository.getBySymbol(symbol).symbol;
+    document.getElementById('info_shells').innerHTML = repository.getBySymbol(symbol).shells;
+    document.getElementById('info_shells_amount').innerHTML = repository.getBySymbol(symbol).shells.length;
+    document.getElementById('info_neutrons').innerHTML = repository.getBySymbol(symbol).neutrons;
+    document.getElementById('info_number').innerHTML = repository.getBySymbol(symbol).number;
+    document.getElementById('info_shells').innerHTML = repository.getBySymbol(symbol).shells;
+    document.getElementById('info_shells_amount').innerHTML = repository.getBySymbol(symbol).shells.length;
+    document.getElementById('info_atomic_mass').innerHTML = repository.getBySymbol(symbol).atomicMass;
+    document.getElementById('info_apperance').innerHTML = repository.getBySymbol(symbol).appearance;
+    document.getElementById('info_boil').innerHTML = repository.getBySymbol(symbol).boil;
+    document.getElementById('info_category').innerHTML = repository.getBySymbol(symbol).category;
+    document.getElementById('info_discoveredBy').innerHTML = repository.getBySymbol(symbol).discoveredBy;
+    document.getElementById('info_namedBy').innerHTML = repository.getBySymbol(symbol).namedBy;
+    document.getElementById('info_melt').innerHTML = repository.getBySymbol(symbol).melt;
+    document.getElementById('info_molarHeat').innerHTML = repository.getBySymbol(symbol).molarHeat;
+    document.getElementById('info_period').innerHTML = repository.getBySymbol(symbol).period;
+    document.getElementById('info_phase').innerHTML = repository.getBySymbol(symbol).phase;
+    document.getElementById('info_source').innerHTML = repository.getBySymbol(symbol).source;
+
 }
 function tableLayout(table, index) {
 
@@ -118,7 +140,6 @@ function tableLayout(table, index) {
     object.position.x = (table[index + 3] * 140) - 1330;
     object.position.y = -(table[index + 4] * 180) + 990;
     targets.table.push(object);
-
 }
 
 function transform(target, duration) {
@@ -135,10 +156,9 @@ function transform(target, duration) {
         .to({}, duration * 2)
         .onUpdate(render)
         .start();
-
 }
 
-function transformObjectPosition(object, targetObject, duration) {
+function transformObjectPosition(object, targetObject) {
 
     new TWEEN.Tween(object.position)
         .to({
@@ -148,7 +168,6 @@ function transformObjectPosition(object, targetObject, duration) {
         })
         .easing(TWEEN.Easing.Exponential.InOut)
         .start();
-
 }
 
 function onWindowResize() {
@@ -156,12 +175,10 @@ function onWindowResize() {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     render();
-
 }
 
 function render() {
     renderer.render(scene, camera);
-
 }
 
 function animate() {
