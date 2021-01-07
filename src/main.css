@@ -100,9 +100,14 @@ body {
   top:10%;
   font-size: 16px;
   color: rgba(255, 255, 255, 255);
-  background-color: #000000;
+  background-color: transparent;
+  z-index: 9999;
 }
 #tabelka{
   color: rgba(255, 255, 255, 255);
   text-shadow: 5px 5px 15px rgba(200, 200, 255, 255);
+}
+
+#info_wikipedia_link{
+  color: white;
 }
