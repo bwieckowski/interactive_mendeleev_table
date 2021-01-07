@@ -130,7 +130,6 @@ function elementClickHandler(i, symbol){
     document.getElementById('info_molarHeat').innerHTML = repository.getBySymbol(symbol).molarHeat;
     document.getElementById('info_period').innerHTML = repository.getBySymbol(symbol).period;
     document.getElementById('info_phase').innerHTML = repository.getBySymbol(symbol).phase;
-    document.getElementById('info_source').innerHTML = repository.getBySymbol(symbol).source;
 
 }
 function tableLayout(table, index) {
